@@ -4,51 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createStore } from "redux";
+import allReducers from "./reducers";
+import { Provider } from "react-redux";
 
-// let store = createStore(reducer);
-//STORE => globalised state
-
-//  ACTION =>function that returns an object
-const increment = () => {
-  return {
-    type: "INCREMENT",
-  };
-};
-
-const decrement = () => {
-  return {
-    type: "DECREMENT",
-  };
-};
-
-// REDUCER => describes how action transforms this state to next state
-
-const counter = (state = 0, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      return state + 1;
-    case "DECREMENT":
-      return state - 1;
-  }
-};
-
-let store = createStore(counter);
-// display it in console
-store.subscribe(() => console.log(store.getState()));
-
-// DIPATCH => dispatch action to reducer
-store.dispatch(increment());
-
-// dispatch action to reducer , reducer checks the action and updates the store
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+const myStore = createStore(
+  allReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(
+  <Provider store={myStore}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);

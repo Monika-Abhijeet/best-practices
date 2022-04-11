@@ -12,6 +12,7 @@ import Home from "./components/router/Home";
 import Shop from "./components/router/Shop";
 import ShopDetails from "./components/router/ShopDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
